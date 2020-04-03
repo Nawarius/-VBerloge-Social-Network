@@ -1,0 +1,28 @@
+.logo {
+	width:100px;
+	height:100px;
+	grid-column-start:1;
+	grid-column-end:2;
+}
+
+.logoDiv {
+	grid-column-start:1;
+	grid-column-end:4;
+	display:grid;
+	grid-template-columns:100px auto 100px;
+	grid-gap:0;
+	background-color:green;
+	margin:0;
+	padding:0;
+}
+header{
+	background-color:#69F0FF;
+	grid-column-start:2;
+	grid-column-end:3;
+}
+.logo2 {
+	width:100px;
+	height:100px;
+	grid-column-start:3;
+	grid-column-end:4;
+}
