@@ -4,6 +4,10 @@
 	grid-column-start:1;
 	grid-column-end:2;
 }
+.mainLogo{
+	width:240px;
+	height:100px;
+}
 
 .logoDiv {
 	grid-column-start:1;
@@ -16,9 +20,10 @@
 	padding:0;
 }
 header{
-	background-color:#69F0FF;
+	background-color:#2D2D2D;
 	grid-column-start:2;
 	grid-column-end:3;
+	text-align:center;
 }
 .logo2 {
 	width:100px;
