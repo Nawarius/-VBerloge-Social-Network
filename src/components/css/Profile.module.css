@@ -1,3 +1,10 @@
 .profileDiv{
+	padding:5px;
 	background-color: yellow;
+}
+.avatar{
+	width:120px;
+	height:120px;
+	border-radius:50%;
+	border:1px solid black;
 }

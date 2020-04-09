@@ -1,8 +1,14 @@
 import React from 'react';
 import MessagesElements from './css/Messages.module.css'
-const Messages = () => {
+import UserList from './UserList.jsx'
+import Dialogs from './Dialogs.jsx'
+const Messages = (props) => {
+
 	return(
-			<div className = {MessagesElements.back}>Messages modx</div>
+			<div className = {MessagesElements.back}>
+				<UserList state = {props.state}  />
+				<Dialogs state = {props.state}  />
+			</div>
 		);
 }
 
