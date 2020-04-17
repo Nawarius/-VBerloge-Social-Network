@@ -8,14 +8,15 @@ import {Route, BrowserRouter} from 'react-router-dom';
 import './App.css';
 
 function App(props) {
+		
   return (
 	<BrowserRouter>
 		<div className = "appWrapper">
 		  <Header />
 		  <Navbar />
 		  <div>
-			<Route render = {()=> <Profile />} path = "/Profile" />
-			<Route render = {()=> <Messages state = {props.state} />} path = "/Messages" />
+			<Route render = {()=> <Profile store = {props.store} />} path = "/Profile" />
+			<Route render = {()=> <Messages state = {props.store._state} />} path = "/Messages" />
 		  </div>
 		  <Rightbar />
 		</div>

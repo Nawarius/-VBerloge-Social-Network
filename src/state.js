@@ -1,5 +1,6 @@
 import React from 'react';
-export let state = {
+let store = {
+	state = {
 	 messages : [
 			{message:"Hey, buddy"},
 			{message:"Hi,darling!"},
@@ -13,9 +14,30 @@ export let state = {
 			{name : "Peter", age : 16},
 			{name : "Jesus", age : 33},
 			{name : "GrandMa", age : 99}
-		]
-};
-/*export let stateFunc = {
-		messageData : function (arg) {let messageArray = []; messageArray.map((el)=>{return <div>{el.message}</div>})},
-		usersData : function (arg) {let usersArray = []; usersArray.map((el)=>{return <div>{el.name}</div>})}
-};*/
+		],
+	 reRenderFromState : function (render){
+		 this.reRenderFromState = render;
+	 },
+	 profilePosts : {
+			posts : [
+				{post:"My first post from states",likes:10},
+				{post:"Im Admin Bear!",likes:20}
+			],
+			addPost : function (newPost){
+				this.posts.unshift(newPost);
+				state.reRenderFromState(state);
+			},
+			changeArea : function(change){
+				let text = change;
+				state.reRenderFromState(state);
+				return text;
+			}
+		}
+	}
+}
+
+export default store
+
+
+
+

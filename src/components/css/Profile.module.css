@@ -8,3 +8,20 @@
 	border-radius:50%;
 	border:1px solid black;
 }
+.postsAvatar{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	border:1px solid black;
+}
+.newPost{
+	display:grid;
+	grid-template-columns:60px;
+	grid-gap:10px;
+	background-color:red;
+	padding:5px;
+}
+.textPost{
+	width:500px;
+	height:100px;
+}
