@@ -1,6 +1,5 @@
 import React from 'react';
 import PostsElements from './css/Posts.module.css'
-
 let Posts = (props) => {
 	let avaAdress = "https://i.pinimg.com/originals/06/81/63/06816339340605e8797bf5fdd38102d9.png";
 

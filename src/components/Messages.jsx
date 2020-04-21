@@ -6,8 +6,8 @@ const Messages = (props) => {
 
 	return(
 			<div className = {MessagesElements.back}>
-				<UserList state = {props.state}  />
-				<Dialogs state = {props.state}  />
+				<UserList state = {props.state} />
+				<Dialogs state = {props.state} dispatch = {props.dispatch} />
 			</div>
 		);
 }

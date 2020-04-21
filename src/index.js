@@ -6,9 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import {store,subscribe} from './redux/store.js';
 
 
-let reRender = (state) => ReactDOM.render(
+let reRender = (store) => ReactDOM.render(
   <React.StrictMode>
-    <App store = {state} />
+    <App state = {store.getState()} dispatch = {store.dispatch.bind(store)} />
   </React.StrictMode>,
   document.getElementById('root')
 );

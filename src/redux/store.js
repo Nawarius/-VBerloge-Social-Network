@@ -1,24 +1,26 @@
 import React from 'react';
-
-const ADD_POST = "ADD-POST";
-const CHANGE_AREA = "CHANGE-AREA";
+import {postsReducer} from './reducers/posts-reducer.js'
+import {dialogsReducer} from './reducers/dialogs-reducer.js'
 
 export let store = {
 	_state : {
-	 messages : [
-			{message:"Hey, buddy"},
-			{message:"Hi,darling!"},
-			{message:"Daddy, your dog eats three"},
-			{message:"God bless you"},
-			{message:"Do you wanna play a game?"}
-		],
-	 users : [
-			{name : "John", age : 25},
-			{name : "Samanta", age : 30},
-			{name : "Peter", age : 16},
-			{name : "Jesus", age : 33},
-			{name : "GrandMa", age : 99}
-		],		
+		dialogsPage:{
+				 messages : [
+						{message:"Hey, buddy"},
+						{message:"Hi,darling!"},
+						{message:"Daddy, your dog eats three"},
+						{message:"God bless you"},
+						{message:"Do you wanna play a game?"}
+					],
+				 users : [
+						{name : "John", age : 25},
+						{name : "Samanta", age : 30},
+						{name : "Peter", age : 16},
+						{name : "Jesus", age : 33},
+						{name : "GrandMa", age : 99}
+					],
+				 newMessage : ""
+		},
 	 profilePage : {
 			 posts : [
 					{post:"My first post from states",likes:10},
@@ -28,23 +30,12 @@ export let store = {
 		},
 	},
 	
-	changeAreaActionCreator: (text) => {return {type:CHANGE_AREA,change:text}},
-	addPostActionCreator: ()=> {return {type:ADD_POST}},
+	getState : function(){return this._state},
 	
 	dispatch(action){
-		if(action.type === ADD_POST){
-				let newPost = {
-					post: store._state.profilePage.newPost,
-					likes: 0
-				};
-				this._state.profilePage.posts.unshift(newPost);
-				store._state.profilePage.newPost = "";
-				reRenderFromState(this);
-		}
-		else if (action.type === CHANGE_AREA){
-				this._state.profilePage.newPost = action.change;
-				reRenderFromState(this);				
-		};
+		store = postsReducer(store,action);
+		store = dialogsReducer(store,action);
+		reRenderFromState(this);
 	}
 };
 

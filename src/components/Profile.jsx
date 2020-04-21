@@ -1,19 +1,20 @@
 import React from 'react';
 import ProfileElements from './css/Profile.module.css'
 import Posts from './Posts.jsx'
+import {changeAreaActionCreator,addPostActionCreator} from '../redux/reducers/posts-reducer.js'
+
 const Profile = (props) => {
 	
 	let newPost = React.createRef();
-	let changeFromStates = props.store._state.profilePage.newPost;
+	let changeFromStates = props.state.profilePage.newPost;
 	
 	let addPost = () => {
-		props.store.dispatch(props.store.addPostActionCreator());
+		props.dispatch(addPostActionCreator());
 	}
-	
 	
 	let changeArea = (e) => {
 		let change = newPost.current.value;
-		props.store.dispatch(props.store.changeAreaActionCreator(change));
+		props.dispatch(changeAreaActionCreator(change));
 	}
 	
 	return(
@@ -33,7 +34,7 @@ const Profile = (props) => {
 						</div>
 					</div>
 				<div>
-					<Posts posts = {props.store._state.profilePage.posts} />
+					<Posts posts = {props.state.profilePage.posts} />
 				</div>
 			</div>
 			

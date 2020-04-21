@@ -15,8 +15,8 @@ function App(props) {
 		  <Header />
 		  <Navbar />
 		  <div>
-			<Route render = {()=> <Profile store = {props.store} />} path = "/Profile" />
-			<Route render = {()=> <Messages state = {props.store._state} />} path = "/Messages" />
+			<Route render = {()=> <Profile state = {props.state} dispatch = {props.dispatch} />} path = "/Profile" />
+			<Route render = {()=> <Messages state = {props.state} dispatch = {props.dispatch} />} path = "/Messages" />
 		  </div>
 		  <Rightbar />
 		</div>
