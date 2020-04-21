@@ -5,15 +5,16 @@ import {changeAreaActionCreator,addMessageActionCreator} from '../redux/reducers
 const Dialogs = (props) => {
 	let messageData = props.state.dialogsPage.messages.map((el)=>{return <div>{el.message}</div>});
 	
+	let newMessage = React.createRef();
 	
-	let changeFromStates = props.state.dialogsPage.newMessage;
+	let changeFromStatesDialogs = props.state.dialogsPage.newMessage;
 	
 	let addMessage = () => {
 		props.dispatch(addMessageActionCreator());
 	}
 	
-	let changeArea = (e) => {
-		let change = e.target.value;
+	let changeArea = () => {
+		let change = newMessage.current.value;
 		props.dispatch(changeAreaActionCreator(change));
 	}
 	
@@ -21,7 +22,7 @@ const Dialogs = (props) => {
 			<div className = {DialogsElements.back}>
 				<div>Диалоги</div>
 				<div>{messageData}</div>
-				<textarea value = {changeFromStates} onChange = {changeArea} placeholder = "Enter you message"></textarea>
+				<textarea ref = {newMessage} value = {changeFromStatesDialogs} onChange = {changeArea} placeholder = "Enter you message"></textarea>
 				<div><button onClick = {addMessage} >Add</button></div>
 			</div>
 		);

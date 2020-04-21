@@ -1,28 +1,38 @@
 const ADD_POST = "ADD-POST";
-const CHANGE_AREA = "CHANGE-AREA";
+const CHANGE_AREA_POSTS = "CHANGE-AREA-POSTS";
 
-export const postsReducer = (store,action) => {
+let initialState = {
+	 
+			 posts : [
+					{post:"My first post from states",likes:10},
+					{post:"Im Admin Bear!",likes:20}
+				],
+			 newPost : ""	
+		
+	}
+
+export const postsReducer = (state = initialState,action) => {
 		
 		switch (action.type){
-			case ADD_POST: 
+			case ADD_POST:
+			
 					//alert("ADD POST");
 					let newPost = {
-					post: store._state.profilePage.newPost,
+					post: state.newPost,
 					likes: 0
 					};
-					store._state.profilePage.posts.unshift(newPost);
-					store._state.profilePage.newPost = "";
-					return store;
+					state.posts.unshift(newPost);
+					state.newPost = "";
+					return state;
 			
-			case CHANGE_AREA:
-					//alert("CHANGE AREA");
-					debugger;
-					store._state.profilePage.newPost = action.change;
-					return store;
+			case CHANGE_AREA_POSTS:
+					//alert("CHANGE AREA POSTS");
+					state.newPost = action.change;
+					return state;
 			default: 
-					return store;
+					return state;
 		}
 }
 
-export let changeAreaActionCreator = (text) => {return {type:CHANGE_AREA,change:text}};
+export let changeAreaActionCreator = (text) => {return {type:CHANGE_AREA_POSTS,change:text}};
 export let addPostActionCreator = ()=> {return {type:ADD_POST}};

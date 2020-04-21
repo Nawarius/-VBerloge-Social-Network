@@ -33,8 +33,8 @@ export let store = {
 	getState : function(){return this._state},
 	
 	dispatch(action){
-		store = postsReducer(store,action);
-		store = dialogsReducer(store,action);
+		this._state = postsReducer(this._state,action);
+		this._state = dialogsReducer(this._state,action);
 		reRenderFromState(this);
 	}
 };
