@@ -4,23 +4,21 @@ import Navbar from './components/Navbar.jsx';
 import ProfileContain from './components/Profile-Contain.jsx';
 import Rightbar from './components/Rightbar.jsx';
 import Messages from './components/Messages.jsx';
-import {Route, BrowserRouter} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './App.css';
 
 function App(props) {
 		
   return (
-	<BrowserRouter>
 		<div className = "appWrapper">
 		  <Header />
 		  <Navbar />
 		  <div>
-			<Route render = {()=> <ProfileContain state = {props.state} dispatch = {props.dispatch} />} path = "/Profile" />
-			<Route render = {()=> <Messages state = {props.state} dispatch = {props.dispatch} />} path = "/Messages" />
+			<Route render = {()=> <ProfileContain />} path = "/Profile" />
+			<Route render = {()=> <Messages />} path = "/Messages" />
 		  </div>
 		  <Rightbar />
-		</div>
-	</BrowserRouter>	
+		</div>	
   );
 }
 
