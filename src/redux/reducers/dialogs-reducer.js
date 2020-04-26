@@ -25,16 +25,22 @@ export const dialogsReducer = (state = initialState,action) => {
 		
 		switch (action.type){
 			case ADD_MESSAGE: 
+			{
 					//alert("ADD POST");
 					let newMessage = {message: state.newMessage};
-					state.messages.push(newMessage);
-					state.newMessage = "";					
-					return state;
-			
+					let stateCopy = {...state};
+					stateCopy.messages = [...state.messages];
+					stateCopy.messages.push(newMessage);
+					stateCopy.newMessage = "";					
+					return stateCopy;
+			}
 			case CHANGE_AREA_DIALOGS:
+			{
 					//alert("CHANGE AREA DIALOGS");
-					state.newMessage = action.change;
-					return state;
+					let stateCopy = {...state};
+					stateCopy.newMessage = action.change;
+					return stateCopy;
+			}
 			default: 
 					return state;
 		}

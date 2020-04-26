@@ -15,20 +15,24 @@ export const postsReducer = (state = initialState,action) => {
 		
 		switch (action.type){
 			case ADD_POST:
-			
-					//alert("ADD POST");
+				{				//alert("ADD POST");
 					let newPost = {
 					post: state.newPost,
 					likes: 0
 					};
-					state.posts.unshift(newPost);
-					state.newPost = "";
-					return state;
-			
+					let stateCopy = {...state};
+					stateCopy.posts = [...state.posts];
+					stateCopy.posts.unshift(newPost);
+					stateCopy.newPost = "";
+					return stateCopy;
+				}
 			case CHANGE_AREA_POSTS:
-					//alert("CHANGE AREA POSTS");
-					state.newPost = action.change;
-					return state;
+				{
+					//alert("CHANGE AREA POSTS" + " " + "state.newPost = " + state.newPost);
+					let stateCopy = {...state}
+					stateCopy.newPost = action.change;
+					return stateCopy;
+				}
 			default: 
 					return state;
 		}

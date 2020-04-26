@@ -4,6 +4,7 @@ import Posts from './Posts.jsx'
 
 
 const Profile = (props) => {
+	let changeFromStatesPosts = props.profilePage.newPost;
 	
 	let addPost = () => {
 		props.addPost()
@@ -22,7 +23,7 @@ const Profile = (props) => {
 							<img className = {ProfileElements.postsAvatar} src = "https://i.pinimg.com/originals/06/81/63/06816339340605e8797bf5fdd38102d9.png" /> 	
 						</div>
 						<div>
-							<textarea placeholder = "Enter the post" value = {props.changeFromStatesPosts} onChange = {changeArea} className = {ProfileElements.textPost} >
+							<textarea placeholder = "Enter the post" value = {changeFromStatesPosts} onChange = {changeArea} className = {ProfileElements.textPost} >
 							</textarea>
 						</div>
 						<div>
@@ -30,7 +31,7 @@ const Profile = (props) => {
 						</div>
 					</div>
 				<div>
-					<Posts posts = {props.posts} />
+					<Posts posts = {props.profilePage.posts} />
 				</div>
 			</div>
 			

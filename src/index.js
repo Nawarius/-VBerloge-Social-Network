@@ -6,26 +6,22 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store.js';
 import {BrowserRouter} from 'react-router-dom';
 import StoreContext from './StoreContext.js';
+import {Provider} from 'react-redux';
 
 
 
-let reRender = (state) => ReactDOM.render(
+ReactDOM.render(
   <React.StrictMode>
 		<BrowserRouter>
-			<StoreContext.Provider value = {store}>
+			<Provider store = {store}>
 				<App  />
-			</StoreContext.Provider>
+			</Provider>
 		</BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-reRender(store.getState());
 
-store.subscribe(()=>{
-	let state = store.getState();
-	reRender(state);
-});
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

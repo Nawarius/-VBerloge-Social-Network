@@ -2,30 +2,24 @@ import React from 'react';
 import {changeAreaActionCreator,addPostActionCreator} from '../redux/reducers/posts-reducer.js'
 import Profile from './Profile.jsx';
 import StoreContext from '../StoreContext.js';
+import {connect} from 'react-redux'
 
-const ProfileContain = (props) => {
-	
-		return( 
-				<StoreContext.Consumer> 
-				{ (store) => {
-					let changeFromStatesPosts = store.getState().profilePage.newPost;
-		
-					let addPost = () => {
-						store.dispatch(addPostActionCreator());
-					}
-					
-					let changeArea = (text) => {
-						store.dispatch(changeAreaActionCreator(text));
-					}
-					
-					return <Profile changeFromStatesPosts = {changeFromStatesPosts} 
-					addPost = {addPost} changeArea = {changeArea} posts = {store.getState().profilePage.posts}/>
-				}
-				}
-				</StoreContext.Consumer>
-				)
-	
-			
-}
+let mapToState = (state) => {
+	return {
+		profilePage: state.profilePage
+	}
+};
+let mapToDispatch = (dispatch) => {
+	return{
+		addPost : () => {
+			dispatch(addPostActionCreator());
+		},
+		changeArea : (text) => {
+			dispatch(changeAreaActionCreator(text));
+		}
+	}
+};
+const ProfileContain = connect(mapToState,mapToDispatch)(Profile);
+
 
 export default ProfileContain
