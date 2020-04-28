@@ -1,5 +1,11 @@
 .item{
+	color:gold;
+	text-decoration:none;
 }
 .back{
 	background-color:#5F478A;
+	padding: 10px;
+	line-height: 20px;
+	font-size: 15px;
+	text-align: center;
 }

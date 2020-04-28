@@ -1,0 +1,24 @@
+.back {
+    display: grid;
+    background-color: #24B3FF;
+    grid-template-columns: 120px auto;
+    grid-template-rows:auto;
+    grid-gap: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.item{
+    border: 1px solid red;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+}
+.text{
+    width:500px;
+    height:120px;
+}
+.name{
+    text-align:center;
+    font-weight: 650;
+    border: 1px solid red;
+}
