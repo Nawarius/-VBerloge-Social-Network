@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header.jsx';
 import Navbar from './components/Navbar.jsx';
 import ProfileContain from './components/Profile-Contain.jsx';
+import SearchContain from './components/Search-Contain.jsx';
 import Rightbar from './components/Rightbar.jsx';
 import Messages from './components/Messages.jsx';
 import Search from './components/Search.jsx';
@@ -17,7 +18,7 @@ function App(props) {
 		  <div>
 			<Route render = {()=> <ProfileContain />} path = "/Profile" />
 			<Route render = {()=> <Messages />} path = "/Messages" />
-			<Route render = {()=> <Search />} path = "/Search" />
+			<Route render = {()=> <SearchContain />} path = "/Search" />
 		  </div>
 		  <Rightbar />
 		</div>
