@@ -1,37 +1,55 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-
-let initialState = {
-	users:[
-		 {id:0,followed:true, firstName:"Медведь", lastName:"Приветливый",location:{country:'Russia', city:'Moscow'},
-		  img:"https://avatarko.ru/img/kartinka/29/medved_28595.jpg"},
-		 {id:1,followed:true, firstName:"Медведь", lastName:"Ученый",location:{country:'Russia', city:'Saint-Petersburg'},
-		  img:"https://99px.ru/sstorage/1/2016/09/image_11509160032084971512.jpg"},
-		 {id:2,followed:false, firstName:"Панда", lastName:"Малыш",location:{country:'China', city:'Fo-Hen'},
-		 img:"https://avatarko.ru/img/kartinka/13/panda_nyasha_12855.jpg"}
-	]
-		
-}
+const SET_USERS = "SET_USERS";
+const SET_TOTAL = "SET_TOTAL"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+let initialState = {users:[],totalCount:25,currentPage:1}
 
 export const searchReducer = (state = initialState,action) => {
 		
 		switch (action.type){
 			case FOLLOW:
 				{		
-					//alert(action.id);
-					let stateCopy = {...state};
-					stateCopy.users[action.id].followed = true;
-					stateCopy.users = [...state.users];
+					let stateCopy = {
+						...state,
+						users: state.users.map(el=>{
+							if (el.id === action.id){
+								return {...el, followed:true}
+							} 
+							return el;
+						})
+					}
 					return stateCopy;
 				}
 			case UNFOLLOW:
 				{
-					//alert(action.id);
-					let stateCopy = {...state};
-					stateCopy.users[action.id].followed = false;
-					stateCopy.users = [...state.users];
+					let stateCopy = {
+						...state,
+						users: state.users.map(el=>{
+							if (el.id === action.id){
+								return {...el,followed:false}
+							} 
+							return el;
+						})
+					}
 					return stateCopy;
 				}
+			case SET_USERS:{
+					let stateCopy = {...state};
+					stateCopy.users = [...state.users,...action.users];
+					return stateCopy;
+				}
+			case SET_TOTAL:{
+					let stateCopy = {...state};
+					stateCopy.totalCount = action.num;
+					return stateCopy;
+			}
+			case SET_CURRENT_PAGE:{
+				//alert("HERE")
+					let stateCopy = {...state};
+					stateCopy.currentPage = action.el;
+					return stateCopy;
+			}
 			default: 
 					return state;
 		}
@@ -39,3 +57,6 @@ export const searchReducer = (state = initialState,action) => {
 
 export let followAC = (userId) => {return {type:FOLLOW,id:userId}};
 export let unfollowAC = (userId)=> {return {type:UNFOLLOW,id:userId}};
+export let setUsersAC = (users)=> {return {type:SET_USERS,users:users}};
+export let setTotalAC = (num)=> {return {type:SET_TOTAL,num:num}};
+export let setCurrentPageAC = (el)=>{return {type:SET_CURRENT_PAGE,el:el}};
