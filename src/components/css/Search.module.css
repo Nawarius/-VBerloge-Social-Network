@@ -22,3 +22,14 @@
     font-weight: 650;
     border: 1px solid red;
 }
+.currentPage{
+	font-weight: bold;
+	cursor:pointer;
+}
+.notCurrentPage{
+	cursor:pointer;
+}
+.preloader{
+	width:150px;
+	height:150px;
+}

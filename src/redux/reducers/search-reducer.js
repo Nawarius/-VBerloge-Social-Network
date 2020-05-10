@@ -3,7 +3,9 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_TOTAL = "SET_TOTAL"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-let initialState = {users:[],totalCount:25,currentPage:1}
+const CHANGE_FETCHING = "CHANGE_FETCHING"
+
+let initialState = {users:[],totalCount:25,currentPage:1,isFetching:false}
 
 export const searchReducer = (state = initialState,action) => {
 		
@@ -36,7 +38,7 @@ export const searchReducer = (state = initialState,action) => {
 				}
 			case SET_USERS:{
 					let stateCopy = {...state};
-					stateCopy.users = [...state.users,...action.users];
+					stateCopy.users = [...action.users];
 					return stateCopy;
 				}
 			case SET_TOTAL:{
@@ -45,9 +47,13 @@ export const searchReducer = (state = initialState,action) => {
 					return stateCopy;
 			}
 			case SET_CURRENT_PAGE:{
-				//alert("HERE")
 					let stateCopy = {...state};
 					stateCopy.currentPage = action.el;
+					return stateCopy;
+			}
+			case CHANGE_FETCHING:{
+					let stateCopy = {...state};
+					stateCopy.isFetching == false? stateCopy.isFetching = true: stateCopy.isFetching = false;
 					return stateCopy;
 			}
 			default: 
@@ -60,3 +66,4 @@ export let unfollowAC = (userId)=> {return {type:UNFOLLOW,id:userId}};
 export let setUsersAC = (users)=> {return {type:SET_USERS,users:users}};
 export let setTotalAC = (num)=> {return {type:SET_TOTAL,num:num}};
 export let setCurrentPageAC = (el)=>{return {type:SET_CURRENT_PAGE,el:el}};
+export let changeFetchingAC = () => {return {type:CHANGE_FETCHING}};
