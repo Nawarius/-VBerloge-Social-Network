@@ -5,7 +5,7 @@ const SET_TOTAL = "SET_TOTAL"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const CHANGE_FETCHING = "CHANGE_FETCHING"
 
-let initialState = {users:[],totalCount:25,currentPage:1,isFetching:false}
+let initialState = {users:[],totalCount:50,currentPage:1,isFetching:false}
 
 export const searchReducer = (state = initialState,action) => {
 		

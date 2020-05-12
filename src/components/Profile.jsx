@@ -16,8 +16,8 @@ const Profile = (props) => {
 	
 	return(
 			<div className = {ProfileElements.profileDiv}>
-				<img className = {ProfileElements.avatar} src = "https://i.pinimg.com/originals/06/81/63/06816339340605e8797bf5fdd38102d9.png"/>
-				<div>Медведь Админ</div>
+				<img className = {ProfileElements.avatar} src = {props.profilePage.photos.small}/>
+				<div>{props.profilePage.fullName}</div>
 					<div className = {ProfileElements.newPost}>
 						<div>
 							<img className = {ProfileElements.postsAvatar} src = "https://i.pinimg.com/originals/06/81/63/06816339340605e8797bf5fdd38102d9.png" /> 	

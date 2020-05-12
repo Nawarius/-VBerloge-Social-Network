@@ -16,7 +16,7 @@ function App(props) {
 		  <Header />
 		  <Navbar />
 		  <div>
-			<Route render = {()=> <ProfileContain />} path = "/Profile" />
+			<Route render = {()=> <ProfileContain />} path = "/Profile/:userId" />
 			<Route render = {()=> <Messages />} path = "/Messages" />
 			<Route render = {()=> <SearchContain />} path = "/Search" />
 		  </div>

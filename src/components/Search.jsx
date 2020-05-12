@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchElements from './css/Search.module.css'
+import {NavLink} from 'react-router-dom'
+import defaultBear from '../pictures/defaultBear.jpg'
 
 const Search = (props) => {
 	  //debugger;
@@ -24,7 +26,8 @@ const Search = (props) => {
 			    return(
 					<div className = {SearchElements.back}>
 						<div>
-							<div><img className = {SearchElements.item} src = {u.photos.small==null?`https://png.pngtree.com/png-clipart/20190920/original/pngtree-cartoon-brown-bear-avatar-free-illustration-png-image_4617465.jpg`:u.photos.small}  /></div>
+							<NavLink to = {'/profile/'+u.id}><div><img className = {SearchElements.item} 
+									src = {u.photos.small==null?defaultBear:u.photos.small}  /></div></NavLink>
 							<div className = {SearchElements.name}>{u.name}</div>
 							<button onClick = {followFunc}>{followVariable}</button>
 						</div>

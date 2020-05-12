@@ -4,7 +4,7 @@ import SearchElements from './css/Search.module.css'
 import Search from './Search.jsx';
 import {connect} from 'react-redux'
 import * as axios from 'axios';
-import preloader from '../pictures/preloader.gif'
+import Preloader from './Preloader.jsx'
 
 class SearchClassComponent extends React.Component {
 	
@@ -15,6 +15,9 @@ class SearchClassComponent extends React.Component {
 		  	this.props.changeFetching();
   			this.props.setUsers(responce.data.items);
   	})
+  }
+  componentWillUnmount(){
+	  this.props.changeFetching()
   }
 
   render() {
@@ -27,7 +30,7 @@ class SearchClassComponent extends React.Component {
 					this.props.setUsers(responce.data.items);
 	  		})
 	  }
-	  return this.props.isFetching == true? <Search {...this.props} onPageChanged = {onPageChanged} />:<img className = {SearchElements.preloader} src = {preloader} />
+	  return this.props.isFetching == true? <Search {...this.props} onPageChanged = {onPageChanged} />:<Preloader />
   }
 }
 
