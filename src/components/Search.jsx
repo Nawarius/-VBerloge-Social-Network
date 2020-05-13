@@ -2,6 +2,7 @@ import React from 'react';
 import SearchElements from './css/Search.module.css'
 import {NavLink} from 'react-router-dom'
 import defaultBear from '../pictures/defaultBear.jpg'
+import * as axios from 'axios'
 
 const Search = (props) => {
 	  //debugger;
@@ -21,7 +22,22 @@ const Search = (props) => {
 				let followVariable = u.followed == true? "unfollow":"follow";
 			
 				let followFunc = () =>{
-					u.followed == true? props.unfollow(u.id): props.follow(u.id);
+					if(!u.followed){
+						axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + u.id,{},{
+							withCredentials:true,
+							headers: { "API-KEY" : "cee7fc84-58af-4506-9d89-136cc0031f74"}
+						}).then(response=>{
+							props.follow(u.id)
+						})
+					}
+					else {
+						axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + u.id,{
+							withCredentials:true,
+							headers: { "API-KEY" : "cee7fc84-58af-4506-9d89-136cc0031f74"}
+						}).then(resopnse=>{
+							props.unfollow(u.id)
+						})
+					}
 				}
 			    return(
 					<div className = {SearchElements.back}>

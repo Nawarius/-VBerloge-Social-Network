@@ -11,7 +11,8 @@ import defaultBear from '../pictures/defaultBear.jpg'
 class ProfileClassComponent extends React.Component {
 	componentDidMount(){
 		let userId = this.props.match.params.userId;
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response=>{
+		if(!userId) userId = 8040;
+		axios.get(`https://social-network.samuraijs.com/api/1.0/Profile/${userId}`).then(response=>{
 			console.log(this.props);
 			let fullName = response.data.fullName;
 			let smallPhoto = response.data.photos.small == null?defaultBear:response.data.photos.small;

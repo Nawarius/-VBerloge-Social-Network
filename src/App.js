@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from './components/Header.jsx';
+import HeaderClassComponent from './components/Header-Contain.jsx';
 import Navbar from './components/Navbar.jsx';
+import LoginContain from './components/Login-Contain.jsx';
 import ProfileContain from './components/Profile-Contain.jsx';
 import SearchContain from './components/Search-Contain.jsx';
 import Rightbar from './components/Rightbar.jsx';
@@ -13,10 +14,11 @@ function App(props) {
 
   return (
 		<div className = "appWrapper">
-		  <Header />
+		  <HeaderClassComponent />
 		  <Navbar />
 		  <div>
-			<Route render = {()=> <ProfileContain />} path = "/Profile/:userId" />
+	  		<Route render = {()=> <LoginContain />} path = "/Login" />
+			<Route render = {()=> <ProfileContain />} path = "/Profile/:userId?" />
 			<Route render = {()=> <Messages />} path = "/Messages" />
 			<Route render = {()=> <SearchContain />} path = "/Search" />
 		  </div>

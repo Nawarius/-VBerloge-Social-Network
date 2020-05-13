@@ -7,6 +7,8 @@ const Rightbar = () => {
 		<div className = {RightbarElements.back}>
 			<div>
 				<div><NavLink to = "/Search" className = {RightbarElements.item}>Search</NavLink></div>
+				<div><NavLink to = "/Login" className = {RightbarElements.item}>Login</NavLink></div>
+
 			</div>
 
 		</div>
