@@ -1,3 +1,5 @@
+import searchAPI from '../../api/searchAPI.js'
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -53,7 +55,7 @@ export const searchReducer = (state = initialState,action) => {
 			}
 			case CHANGE_FETCHING:{
 					let stateCopy = {...state};
-					stateCopy.isFetching == false? stateCopy.isFetching = true: stateCopy.isFetching = false;
+					stateCopy.isFetching = action.change;
 					return stateCopy;
 			}
 			default: 
@@ -66,4 +68,43 @@ export let unfollowAC = (userId)=> {return {type:UNFOLLOW,id:userId}};
 export let setUsersAC = (users)=> {return {type:SET_USERS,users:users}};
 export let setTotalAC = (num)=> {return {type:SET_TOTAL,num:num}};
 export let setCurrentPageAC = (el)=>{return {type:SET_CURRENT_PAGE,el:el}};
-export let changeFetchingAC = () => {return {type:CHANGE_FETCHING}};
+export let changeFetchingAC = (change) => {return {type:CHANGE_FETCHING,change:change}};
+
+
+export const searchThunkCreator = (pageListCount,currentPage) => {
+return (dispatch) => {
+	  dispatch(changeFetchingAC(false));
+	  searchAPI.setUsers(pageListCount,currentPage)
+		.then(responce => {
+		  	dispatch(changeFetchingAC(true));
+		  	dispatch(setCurrentPageAC(currentPage))
+  			dispatch(setUsersAC(responce.data.items));
+  		})
+	}	
+}
+export const searchThunkFollowCreator = (followButton, id) => {
+	return (dispatch) => {
+		document.getElementById(followButton+id).setAttribute('disabled', 'true');
+		searchAPI.followUsers(id).then(response => {
+			document.getElementById(followButton+''+id).removeAttribute('disabled');
+			dispatch(followAC(id));
+		})
+	}
+}
+export const searchThunkUnfollowCreator = (followButton, id) => {
+	return (dispatch) => {
+		document.getElementById(followButton+id).setAttribute('disabled', 'true');
+		searchAPI.followUsers(id).then(response => {
+			document.getElementById(followButton+''+id).removeAttribute('disabled');
+			dispatch(unfollowAC(id));
+		})
+	}
+}
+	
+
+
+
+
+
+
+

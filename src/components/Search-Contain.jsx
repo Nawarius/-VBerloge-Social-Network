@@ -1,34 +1,19 @@
 import React from 'react';
-import {followAC,unfollowAC,setUsersAC,setTotalAC,setCurrentPageAC,changeFetchingAC} from '../redux/reducers/search-reducer.js'
+import {followAC,unfollowAC,setUsersAC,setTotalAC,setCurrentPageAC,changeFetchingAC,searchThunkCreator,searchThunkFollowCreator,
+	   searchThunkUnfollowCreator} from '../redux/reducers/search-reducer.js'
 import SearchElements from './css/Search.module.css'
 import Search from './Search.jsx';
 import {connect} from 'react-redux'
-import * as axios from 'axios';
 import Preloader from './Preloader.jsx'
 
 class SearchClassComponent extends React.Component {
 	
   componentDidMount() {
-  	  axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageListCount}&page=${this.props.currentPage}`)
-		.then(responce => {
-		 // debugger;
-		  	this.props.changeFetching();
-  			this.props.setUsers(responce.data.items);
-  	})
+	 this.props.setUsersThunk(this.props.pageListCount,this.props.currentPage)
   }
-  componentWillUnmount(){
-	  this.props.changeFetching()
-  }
-
   render() {
-	  let onPageChanged = (el) => {
-		this.props.changeFetching();
-	  	this.props.setCurrentPage(el);
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageListCount}&page=${el}`)
-				.then(responce => {
-					this.props.changeFetching();
-					this.props.setUsers(responce.data.items);
-	  		})
+	  let onPageChanged = (currentPage) => {
+		this.props.setUsersThunk(this.props.pageListCount,currentPage)
 	  }
 	  return this.props.isFetching == true? <Search {...this.props} onPageChanged = {onPageChanged} />:<Preloader />
   }
@@ -62,6 +47,15 @@ let mapToDispatch = (dispatch) => {
 		},
 		changeFetching: () =>{
 			dispatch(changeFetchingAC())
+		},
+		setUsersThunk: (pageListCount,currentPage) =>{
+			dispatch(searchThunkCreator(pageListCount,currentPage))
+		},
+		followThunk: (followButton,id) => {
+			dispatch(searchThunkFollowCreator(followButton,id));
+		},
+		unfollowThunk:(followButton,id) => {
+			dispatch(searchThunkUnfollowCreator(followButton,id));
 		}
 	}
 };
