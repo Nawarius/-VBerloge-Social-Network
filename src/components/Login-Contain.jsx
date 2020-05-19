@@ -6,10 +6,12 @@ import * as axios from 'axios';
 
 class LoginClassComponent extends React.Component {
 	componentDidMount(){
+		let isAuth;
 		axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{
 			withCredentials:true
 		}).then(response=>{
-			this.props.authMe(response.data.data.id,response.data.data.email,response.data.data.login);
+			response.data.resultCode == 0? isAuth = true: isAuth = false;
+			this.props.authMe(response.data.data.id,response.data.data.email,response.data.data.login, isAuth);
 		})
 	}
 	render(){
@@ -21,14 +23,15 @@ let mapToState = (state) => {
 	return{
 		id:state.auth.id,
 		email:state.auth.email,
-		login:state.auth.login
+		login:state.auth.login,
+		isAuth:state.auth.isAuth
 	}
 }
 
 let mapToDispatch = (dispatch) => {
 	return{
-		authMe : (id,email,login) => {
-			dispatch(authAC(id,email,login))
+		authMe : (id,email,login,isAuth) => {
+			dispatch(authAC(id,email,login,isAuth))
 		}
 	}
 }

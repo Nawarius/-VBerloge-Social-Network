@@ -1,8 +1,16 @@
-import React from 'react';
+import React from 'react'
 import Dialogs from './Dialogs.jsx'
 import {changeAreaActionCreator,addMessageActionCreator} from '../redux/reducers/dialogs-reducer.js'
-import StoreContext from '../StoreContext.js';
+import StoreContext from '../StoreContext.js'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom';
+import {withRedirect} from '../HOC/Redirect.jsx'
+
+class DialogsClassComponent extends React.Component {
+	render(){
+		return <Dialogs {...this.props} />
+	}
+}
 
 let mapToState = (state) => {
 	return {
@@ -20,7 +28,6 @@ let mapToDispatch = (dispatch) => {
 		}
 	}
 };
+const withRedirectDialog = withRedirect(DialogsClassComponent);
+export default connect(mapToState,mapToDispatch)(withRedirectDialog);
 
-const DialogsContain = connect(mapToState,mapToDispatch)(Dialogs);
-
-export default DialogsContain

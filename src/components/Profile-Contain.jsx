@@ -13,7 +13,6 @@ class ProfileClassComponent extends React.Component {
 		let userId = this.props.match.params.userId;
 		if(!userId) userId = 8040;
 		axios.get(`https://social-network.samuraijs.com/api/1.0/Profile/${userId}`).then(response=>{
-			console.log(this.props);
 			let fullName = response.data.fullName;
 			let smallPhoto = response.data.photos.small == null?defaultBear:response.data.photos.small;
 			let id = response.data.userId;

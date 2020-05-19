@@ -3,7 +3,8 @@ const SET_USERS = "ADD-SET_USERS";
 let initialState = {
 	id: null,
 	email: null,
-	login: null
+	login: null,
+	isAuth:false
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ export const authReducer = (state = initialState, action) => {
 			stateCopy.id = action.id;
 			stateCopy.email = action.email;
 			stateCopy.login = action.login;
+			stateCopy.isAuth = action.isAuth;
 			return stateCopy;
 		}
 		default:
@@ -23,4 +25,4 @@ export const authReducer = (state = initialState, action) => {
 	}
 }
 			
-export let authAC = (id,email,login) => {return {type:SET_USERS,id:id,email:email,login:login}};
+export let authAC = (id,email,login,isAuth) => {return {type:SET_USERS,id:id,email:email,login:login,isAuth:isAuth}};
