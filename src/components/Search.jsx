@@ -3,7 +3,6 @@ import SearchElements from './css/Search.module.css'
 import {NavLink} from 'react-router-dom'
 import defaultBear from '../pictures/defaultBear.jpg'
 import * as axios from 'axios'
-import searchAPI from '../api/searchAPI.js'
 
 const Search = (props) => {
 	  let pages = [];

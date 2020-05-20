@@ -1,4 +1,4 @@
-import searchAPI from '../../api/searchAPI.js'
+import {searchAPI} from '../../api/API.js'
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";

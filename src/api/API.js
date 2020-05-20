@@ -1,5 +1,6 @@
 import React from 'react'
 import * as axios from 'axios'
+import defaultBear from '../pictures/defaultBear.jpg'
 
 const baseURL = 'https://social-network.samuraijs.com/api/1.0/'
 
@@ -11,7 +12,7 @@ const instance = axios.create({
 	}
 })
 
-const searchAPI = {
+export const searchAPI = {
 	setUsers(pageListCount, currentPage) {
 		return instance.get(`users?count=${pageListCount}&page=${currentPage}`)
 	},
@@ -22,8 +23,17 @@ const searchAPI = {
 		return instance.delete('follow/' + id)
 	}
 }
+export const profileAPI = {
+	showUser(id) {
+		let userId = id;
+		if(!userId) userId = 8040;
+		return instance.get(`profile/${userId}`)
+	},
+	getStatus(id) {
+		let userId = id;
+		if(!userId) userId = 8040;
+		return instance.get(`profile/status${userId}`)
+	}
+}
 
 
-
-
-export default searchAPI

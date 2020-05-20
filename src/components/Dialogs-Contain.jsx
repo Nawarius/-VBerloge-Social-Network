@@ -5,7 +5,7 @@ import StoreContext from '../StoreContext.js'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom';
 import {withRedirect} from '../HOC/Redirect.jsx'
-
+import {compose} from 'redux'
 class DialogsClassComponent extends React.Component {
 	render(){
 		return <Dialogs {...this.props} />
@@ -28,6 +28,9 @@ let mapToDispatch = (dispatch) => {
 		}
 	}
 };
-const withRedirectDialog = withRedirect(DialogsClassComponent);
-export default connect(mapToState,mapToDispatch)(withRedirectDialog);
+export default compose(
+connect(mapToState,mapToDispatch),
+withRedirect	
+)(DialogsClassComponent)
+
 

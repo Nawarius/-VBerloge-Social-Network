@@ -1,5 +1,5 @@
 import React from 'react';
-import {changeAreaActionCreator,addPostActionCreator,setUserFromSearchAC} from '../redux/reducers/posts-reducer.js'
+import {changeAreaActionCreator,addPostActionCreator,setUserFromSearchAC, profileThunkCreator} from '../redux/reducers/posts-reducer.js'
 import Profile from './Profile.jsx';
 import StoreContext from '../StoreContext.js';
 import {connect} from 'react-redux'
@@ -7,17 +7,13 @@ import * as axios from 'axios';
 import Preloader from './Preloader.jsx'
 import {withRouter} from 'react-router-dom'
 import defaultBear from '../pictures/defaultBear.jpg'
+import {profileAPI} from '../api/API.js'
+import {compose} from 'redux'
+import {withRedirect} from '../HOC/Redirect.jsx'
 
 class ProfileClassComponent extends React.Component {
 	componentDidMount(){
-		let userId = this.props.match.params.userId;
-		if(!userId) userId = 8040;
-		axios.get(`https://social-network.samuraijs.com/api/1.0/Profile/${userId}`).then(response=>{
-			let fullName = response.data.fullName;
-			let smallPhoto = response.data.photos.small == null?defaultBear:response.data.photos.small;
-			let id = response.data.userId;
-			this.props.setUserFromSearch(id,smallPhoto,fullName)
-		})
+		this.props.showUserThunk(this.props.match.params.userId)
 	}
 	render(){
 		return <Profile {...this.props} />
@@ -36,15 +32,14 @@ let mapToDispatch = (dispatch) => {
 		changeArea : (text) => {
 			dispatch(changeAreaActionCreator(text));
 		},
-		setUserFromSearch: (id,smallPhoto,fullName)=>{
-			dispatch(setUserFromSearchAC(id,smallPhoto,fullName))
-	}
+		showUserThunk : (id) => {
+			dispatch(profileThunkCreator(id))
+		}
 	}
 };
 
-let RouterProfile = withRouter(ProfileClassComponent);
-
-const ProfileContain = connect(mapToState,mapToDispatch)(RouterProfile);
-
-
-export default ProfileContain
+export default compose(
+	connect(mapToState,mapToDispatch),
+	withRouter,
+	withRedirect
+)(ProfileClassComponent)

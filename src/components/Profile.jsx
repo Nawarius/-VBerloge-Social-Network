@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileElements from './css/Profile.module.css'
 import Posts from './Posts.jsx'
+import ProfileStatus from './ProfileStatus.jsx'
 
 
 const Profile = (props) => {
@@ -18,9 +19,10 @@ const Profile = (props) => {
 			<div className = {ProfileElements.profileDiv}>
 				<img className = {ProfileElements.avatar} src = {props.profilePage.photos.small}/>
 				<div>{props.profilePage.fullName}</div>
+				<div><ProfileStatus /></div>
 					<div className = {ProfileElements.newPost}>
 						<div>
-							<img className = {ProfileElements.postsAvatar} src = "https://i.pinimg.com/originals/06/81/63/06816339340605e8797bf5fdd38102d9.png" /> 	
+							<img className = {ProfileElements.postsAvatar} src = {props.profilePage.photos.small} /> 	
 						</div>
 						<div>
 							<textarea placeholder = "Enter the post" value = {changeFromStatesPosts} onChange = {changeArea} className = {ProfileElements.textPost} >

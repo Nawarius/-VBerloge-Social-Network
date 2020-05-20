@@ -1,6 +1,5 @@
 import React from 'react';
-import {followAC,unfollowAC,setUsersAC,setTotalAC,setCurrentPageAC,changeFetchingAC,searchThunkCreator,searchThunkFollowCreator,
-	   searchThunkUnfollowCreator} from '../redux/reducers/search-reducer.js'
+import {setTotalAC,searchThunkCreator,searchThunkFollowCreator,searchThunkUnfollowCreator} from '../redux/reducers/search-reducer.js'
 import SearchElements from './css/Search.module.css'
 import Search from './Search.jsx';
 import {connect} from 'react-redux'
@@ -30,23 +29,8 @@ let mapToState = (state) => {
 };
 let mapToDispatch = (dispatch) => {
 	return{
-		follow : (userId) => {
-			dispatch(followAC(userId));
-		},
-		unfollow : (userId) => {
-			dispatch(unfollowAC(userId));
-		},
-		setUsers: (users) => {
-			dispatch(setUsersAC(users));
-		},
 		setTotalCount: (num) => {
 			dispatch(setTotalAC(num));
-		},
-		setCurrentPage: (el,props) => {
-			dispatch(setCurrentPageAC(el));
-		},
-		changeFetching: () =>{
-			dispatch(changeFetchingAC())
 		},
 		setUsersThunk: (pageListCount,currentPage) =>{
 			dispatch(searchThunkCreator(pageListCount,currentPage))
