@@ -4,7 +4,8 @@ import ProfileElements from './css/Profile.module.css'
 
 class ProfileStatus extends React.Component {
 	state = {
-		editMode : false
+		editMode : false,
+		status: this.props.status
 	}
 	activateEditMode(){
 		this.setState({
@@ -12,17 +13,23 @@ class ProfileStatus extends React.Component {
 		})
 	}
 	deactivateEditMode(){
-		debugger;
 		this.setState({
-			editMode:false
+			editMode : false
 		})
 	}
+	changeStatus(e){
+		this.setState({
+			status:e.currentTarget.value
+		})
+		this.props.updateStatus(e.currentTarget.value)
+	}
+	
 	render(){
 		return <div>
 				{!this.state.editMode ? 
-					<span onClick = {this.activateEditMode.bind(this)}>Status</span>
+					<span onClick = {this.activateEditMode.bind(this)}>{this.props.status}</span>
 							: 
-					<input autoFocus = {true} onBlur = {this.deactivateEditMode.bind(this)} type = "text" />}
+					<input onChange = {this.changeStatus.bind(this)} value = {this.state.status?this.state.status:this.props.status} autoFocus = {true} onBlur = {this.deactivateEditMode.bind(this)} type = "text" />}
 			</div>
 	}
 }

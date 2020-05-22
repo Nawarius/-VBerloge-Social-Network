@@ -32,7 +32,12 @@ export const profileAPI = {
 	getStatus(id) {
 		let userId = id;
 		if(!userId) userId = 8040;
-		return instance.get(`profile/status${userId}`)
+		return instance.get(`profile/status/${userId}`)
+	},
+	updateStatus(status){
+		return instance.put(`profile/status`,{
+			status:status
+		})
 	}
 }
 

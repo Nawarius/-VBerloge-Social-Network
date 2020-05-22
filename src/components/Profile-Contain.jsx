@@ -1,5 +1,5 @@
 import React from 'react';
-import {changeAreaActionCreator,addPostActionCreator,setUserFromSearchAC, profileThunkCreator} from '../redux/reducers/posts-reducer.js'
+import {changeAreaAC,addPostAC, profileThunkCreator,getStatusThunkCreator,updateStatusThunkCreator} from '../redux/reducers/posts-reducer.js'
 import Profile from './Profile.jsx';
 import StoreContext from '../StoreContext.js';
 import {connect} from 'react-redux'
@@ -14,6 +14,7 @@ import {withRedirect} from '../HOC/Redirect.jsx'
 class ProfileClassComponent extends React.Component {
 	componentDidMount(){
 		this.props.showUserThunk(this.props.match.params.userId)
+		this.props.getStatusThunk(this.props.match.params.userId)
 	}
 	render(){
 		return <Profile {...this.props} />
@@ -21,19 +22,25 @@ class ProfileClassComponent extends React.Component {
 }
 let mapToState = (state) => {
 	return {
-		profilePage: state.profilePage
+		profilePage: state.profilePage,
 	}
 };
 let mapToDispatch = (dispatch) => {
 	return{
 		addPost : () => {
-			dispatch(addPostActionCreator());
+			dispatch(addPostAC())
 		},
 		changeArea : (text) => {
-			dispatch(changeAreaActionCreator(text));
+			dispatch(changeAreaAC(text))
 		},
 		showUserThunk : (id) => {
 			dispatch(profileThunkCreator(id))
+		},
+		getStatusThunk : (id) => {
+			dispatch(getStatusThunkCreator(id))
+		},
+		updateStatusThunk : (status) => {
+			dispatch(updateStatusThunkCreator(status))
 		}
 	}
 };

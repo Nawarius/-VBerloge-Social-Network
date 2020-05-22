@@ -1,9 +1,10 @@
 import defaultBear from '../../pictures/defaultBear.jpg'
 import {profileAPI} from '../../api/API.js'
 
-
-const ADD_POST = "ADD-POST";
-const CHANGE_AREA_POSTS = "CHANGE-AREA-POSTS";
+const UPDATE_STATUS = "UPDATE_STATUS"
+const GET_STATUS = "GET_STATUS"
+const ADD_POST = "ADD-POST"
+const CHANGE_AREA_POSTS = "CHANGE-AREA-POSTS"
 const SET_USER_FROM_SEARCH = "SET_USER_FROM_SEARCH"
 
 let initialState = {
@@ -50,14 +51,27 @@ export const postsReducer = (state = initialState,action) => {
 					stateCopy.userId = action.id; stateCopy.photos.small = action.smallPhoto; stateCopy.fullName = action.fullName;
 					return stateCopy;
 			    }
+			case GET_STATUS:{
+					let stateCopy = {...state};
+					stateCopy.status = action.status;
+					return stateCopy;
+				}
+			case UPDATE_STATUS:{
+					let stateCopy = {...state};
+					stateCopy.status = action.status;
+					return stateCopy;
+				}
 			default: 
 					return state;
 		}
 }
 
-export let changeAreaActionCreator = (text) => {return {type:CHANGE_AREA_POSTS,change:text}};
-export let addPostActionCreator = () => {return {type:ADD_POST}};
+export let changeAreaAC = (text) => {return {type:CHANGE_AREA_POSTS,change:text}};
+export let addPostAC = () => {return {type:ADD_POST}};
 export let setUserFromSearchAC = (id,smallPhoto,fullName) => {return {type:SET_USER_FROM_SEARCH,id:id,smallPhoto:smallPhoto,fullName:fullName}}
+export let getStatusAC = (status) => {return {type:GET_STATUS, status:status}};
+export let updateStatusAC = (status) => {return {type:UPDATE_STATUS, status:status}};
+
 
 export const profileThunkCreator = (id) => {
 return (dispatch) => {
@@ -70,14 +84,21 @@ return (dispatch) => {
 	}	
 }
 
-//export const getStatusThunkCreator = (id) => {
-//return (dispatch) => {
-//		profileAPI.getStatus(id).then(response=>{
-//			let id = response.data.userId;
-//  		})
-//	}	
-//}
-
+export const getStatusThunkCreator = (id) => {
+return (dispatch) => {
+		profileAPI.getStatus(id).then(response=>{
+			let text = response.data?response.data:"===="
+			dispatch(getStatusAC(text))
+  		})
+	}	
+}
+export const updateStatusThunkCreator = (status) => {
+return (dispatch) => {
+		profileAPI.updateStatus(status).then(response=>{
+			dispatch(getStatusAC(status))
+  		})
+	}	
+}
 
 
 

@@ -6,7 +6,6 @@ import ProfileStatus from './ProfileStatus.jsx'
 
 const Profile = (props) => {
 	let changeFromStatesPosts = props.profilePage.newPost;
-	
 	let addPost = () => {
 		props.addPost()
 	}
@@ -19,7 +18,7 @@ const Profile = (props) => {
 			<div className = {ProfileElements.profileDiv}>
 				<img className = {ProfileElements.avatar} src = {props.profilePage.photos.small}/>
 				<div>{props.profilePage.fullName}</div>
-				<div><ProfileStatus /></div>
+				<div><ProfileStatus status = {props.profilePage.status} updateStatus = {props.updateStatusThunk}/></div>
 					<div className = {ProfileElements.newPost}>
 						<div>
 							<img className = {ProfileElements.postsAvatar} src = {props.profilePage.photos.small} /> 	
