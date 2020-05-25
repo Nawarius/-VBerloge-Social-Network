@@ -6,7 +6,7 @@ const GET_STATUS = "GET_STATUS"
 const ADD_POST = "ADD-POST"
 const CHANGE_AREA_POSTS = "CHANGE-AREA-POSTS"
 const SET_USER_FROM_SEARCH = "SET_USER_FROM_SEARCH"
-
+const CHANGE_FETCHING = "CHANGE_FETCHING"
 let initialState = {
 	 
 			 posts : [
@@ -20,7 +20,8 @@ let initialState = {
 				 small:'',
 				 large:''
 			 },
-			status:""
+			status:"",
+			isFetching: false
 		
 }
 
@@ -56,11 +57,11 @@ export const postsReducer = (state = initialState,action) => {
 					stateCopy.status = action.status;
 					return stateCopy;
 				}
-			case UPDATE_STATUS:{
+				case CHANGE_FETCHING:{
 					let stateCopy = {...state};
-					stateCopy.status = action.status;
+					stateCopy.isFetching = action.change;
 					return stateCopy;
-				}
+			}
 			default: 
 					return state;
 		}
@@ -71,11 +72,13 @@ export let addPostAC = () => {return {type:ADD_POST}};
 export let setUserFromSearchAC = (id,smallPhoto,fullName) => {return {type:SET_USER_FROM_SEARCH,id:id,smallPhoto:smallPhoto,fullName:fullName}}
 export let getStatusAC = (status) => {return {type:GET_STATUS, status:status}};
 export let updateStatusAC = (status) => {return {type:UPDATE_STATUS, status:status}};
-
+export let changeFetchingAC = (change) => {return {type:CHANGE_FETCHING,change:change}};
 
 export const profileThunkCreator = (id) => {
 return (dispatch) => {
+		changeFetchingAC(false)
 		profileAPI.showUser(id).then(response=>{
+			dispatch(changeFetchingAC(true))
 			let fullName = response.data.fullName;
 			let smallPhoto = response.data.photos.small == null?defaultBear:response.data.photos.small;
 			let id = response.data.userId;

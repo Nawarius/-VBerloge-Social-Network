@@ -8,7 +8,7 @@ import {BrowserRouter} from 'react-router-dom';
 import StoreContext from './StoreContext.js';
 import {Provider} from 'react-redux';
 
-
+window.store = store;
 
 ReactDOM.render(
   <React.StrictMode>

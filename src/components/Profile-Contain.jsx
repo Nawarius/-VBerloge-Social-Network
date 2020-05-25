@@ -17,12 +17,13 @@ class ProfileClassComponent extends React.Component {
 		this.props.getStatusThunk(this.props.match.params.userId)
 	}
 	render(){
-		return <Profile {...this.props} />
+		return this.props.isFetching == true? <Profile {...this.props} />:<Preloader />
 	}
 }
 let mapToState = (state) => {
 	return {
 		profilePage: state.profilePage,
+		isFetching:state.profilePage.isFetching
 	}
 };
 let mapToDispatch = (dispatch) => {

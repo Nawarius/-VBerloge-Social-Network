@@ -23,6 +23,7 @@ export const searchAPI = {
 		return instance.delete('follow/' + id)
 	}
 }
+
 export const profileAPI = {
 	showUser(id) {
 		let userId = id;
@@ -37,6 +38,15 @@ export const profileAPI = {
 	updateStatus(status){
 		return instance.put(`profile/status`,{
 			status:status
+		})
+	}
+}
+
+export const authAPI = {
+	authUser(email,password) {
+		return instance.post('auth/login',{
+			email:email,
+			password:password
 		})
 	}
 }
